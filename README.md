@@ -1,2 +1,3 @@
 # Almuerzi
-Almuerzi es una app mobile creada con React Native para poder pedir comida 
+
+Almuerzi is a mobile app created with React Native to be able to order food

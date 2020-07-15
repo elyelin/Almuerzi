@@ -1,21 +1,52 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import MealsScreen from "./screens/Meals";
+import LoginScreen from "./screens/Login";
+import RegisterScreen from "./screens/Register";
+import AuthLoading from "./screens/AuthLoading";
+import Modal from "./screens/Modal";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const OnBoardingNavigator = createStackNavigator(
+  {
+    Login: LoginScreen,
+    Register: RegisterScreen,
   },
-});
+  {
+    initialRouteName: "Login",
+  }
+);
+
+const AppNavigator = createStackNavigator(
+  {
+    Meals: {
+      screen: MealsScreen,
+    },
+  },
+  {
+    initialRouteName: "Meals",
+  }
+);
+
+const RootStack = createStackNavigator(
+  {
+    Main: AppNavigator,
+    Modal: Modal,
+  },
+  {
+    mode: "modal",
+    headerMode: "none",
+  }
+);
+
+const BaseStack = createSwitchNavigator(
+  {
+    AuthLoading,
+    OnBoarding: OnBoardingNavigator,
+    Root: RootStack,
+  },
+  {
+    initialRouteName: "AuthLoading",
+  }
+);
+
+export default createAppContainer(BaseStack);
