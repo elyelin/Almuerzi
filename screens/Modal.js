@@ -31,7 +31,7 @@ export default ({ navigation }) => {
           <Text style={styles.text}>{data.name}</Text>
           <Text style={styles.text}>{data.desc}</Text>
           <Button
-            title="ACEPTAR"
+            title="Aceptar"
             onPress={() => {
               AsyncStorage.getItem("token").then((x) => {
                 if (x) {
